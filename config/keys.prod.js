@@ -1,5 +1,4 @@
-if (process.env.NODE_ENV === 'production') {
-    module.exports = require('./keys.prod');
-} else {
-    module.exports = require('./keys.dev');
-}
+module.exports = {
+    mongoURI: process.env.MONGO_URI,
+    jwtSecret: process.env.JWT_SECRET
+};
