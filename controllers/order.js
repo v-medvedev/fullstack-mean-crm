@@ -4,15 +4,13 @@ const errorHandler = require('../utils/errorHandler');
 module.exports.getAll = async function(req, res) {
     try {
         const query = {user: req.user.id};
+        if (req.query.start || req.query.end) {
+            query.date = {};
+        }
         if (req.query.start) {
-            query.date = {
-                $gte: req.query.date
-            }
+            query.date['$gte'] = req.query.start;
         }
         if (req.query.end) {
-            if (!query.date) {
-                query.date = {};
-            }
             query.date['$lte'] = req.query.end;
         }
         if (req.query.order) {
